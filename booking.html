@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Booking — Hair Technique</title>
+  <meta name="description" content="Book your appointment at Hair Technique Studio in Lenasia." />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body class="theme-dark">
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="index.html">
+            <img src="Screenshot (21).png" width="120px">
+        </a>
+    <nav>
+      <a href="/shop.html">Shop</a>
+      <a href="/booking.html" class="active">Booking</a>
+      <a href="/gallery.html">Gallery</a>
+      <a href="/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Book Your Session</h1>
+      <p>Select a service, date, and time to reserve your spot.</p>
+    </div>
+  </section>
+
+  <!-- Booking Form -->
+  <main class="container booking">
+    <form id="booking-form" class="form">
+      <!-- Service selection -->
+      <label for="service">Service</label>
+      <select id="service" name="service" required>
+        <option value="">Choose a service</option>
+        <option value="cut">Haircut — 45 min</option>
+        <option value="color">Color — 90 min</option>
+        <option value="treatment">Treatment — 60 min</option>
+      </select>
+
+      <!-- Stylist selection -->
+      <label for="stylist">Stylist</label>
+      <select id="stylist" name="stylist" required>
+        <option value="">Choose a stylist</option>
+        <option value="stylist1">Stylist 1</option>
+        <option value="stylist2">Stylist 2</option>
+      </select>
+
+      <!-- Date -->
+      <label for="date">Date</label>
+      <input type="date" id="date" name="date" required />
+
+      <!-- Time slots -->
+      <label for="time">Time</label>
+      <select id="time" name="time" required>
+        <option value="">Select a time</option>
+        <!-- Populated dynamically -->
+      </select>
+
+      <!-- Customer details -->
+      <label for="name">Your Name</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Phone</label>
+      <input type="tel" id="phone" name="phone" required />
+
+      <button class="btn btn-primary" type="submit">Confirm Booking</button>
+    </form>
+
+    <div id="booking-message" class="message"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© Hair Technique, Lenasia</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>

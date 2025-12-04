@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Dashboard — Hair Technique</title>
+  <meta name="description" content="Staff dashboard for Hair Technique Studio in Lenasia. Manage products and stock alerts." />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body class="theme-dark">
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="index.html">
+            <img src="Screenshot (21).png" width="120px">
+        </a>
+    <nav>
+      <a href="/shop.html">Shop</a>
+      <a href="/booking.html">Booking</a>
+      <a href="/gallery.html">Gallery</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/admin.html" class="active">Admin</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Admin Dashboard</h1>
+      <p>Manage product prices and monitor stock levels.</p>
+    </div>
+  </section>
+
+  <!-- Dashboard -->
+  <main class="container admin">
+    <section>
+      <h2>Products</h2>
+      <div id="products-admin" class="admin-grid"></div>
+    </section>
+
+    <section>
+      <h2>Low Stock Alerts</h2>
+      <ul id="alerts"></ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© Hair Technique, Lenasia — Staff Access Only</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Hair Technique — Lenasia</title>
+
+    <link rel="stylesheet" href="style.css" />
+    
+
+    <style>
+        :root {
+            /* General Variables */
+            --gold: #bfa06f; /* Primary accent color */
+            --bg-dark: #1a1a1a;
+            --bg-light: #f5f3f0;
+            --glass-bg: rgba(26, 26, 26, 0.7);
+            --glass-blur: 8px;
+            
+            /* Layout Variables */
+            --max-width: 1200px;
+            --nav-height: 80px;
+            
+            /* Shadow Variables */
+            --shadow-gold: rgba(191,160,111,0.4);
+            --shadow-subtle: rgba(0, 0, 0, 0.4);
+        }
+        
+        /* The rest of the large style block provided by the user should ideally be in the external linked CSS files (e.g., css/pages.css) but is kept here for direct modification: */
+        
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            padding: 2rem 0;
+        }
+        .product-card {
+            position: relative;
+            width: 220px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 25px rgba(191,160,111,0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(191,160,111,0.25);
+        }
+        .product-image {
+            width: 100%;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+        .product-info {
+            padding: 1rem;
+            text-align: center;
+        }
+        .product-name {
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin: 0.5rem 0;
+        }
+        .product-price {
+            color: #bfa06f;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .add-to-cart-btn {
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            background: linear-gradient(135deg, #f5f3f0, #bfa06f);
+            color: #1a1a1a;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 20px rgba(191,160,111,0.2);
+        }
+        .product-card:hover .add-to-cart-btn {
+            bottom: 16px;
+            opacity: 1;
+        }
+        @media (max-width: 768px) {
+            .product-card { width: 45%; }
+        }
+        @media (max-width: 480px) {
+            .product-card { width: 100%; }
+        }
+        /* Cart count subtle gold badge */
+        #cart-count {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border-radius: 50%;
+            padding: 0 8px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            margin-left: 6px;
+            box-shadow: 0 0 8px var(--shadow-gold);
+            user-select: none;
+        }
+
+        /* Dark mode toggle - elegant */
+        #darkToggle {
+            cursor: pointer;
+            width: 42px;
+            height: 22px;
+            border-radius: 12px;
+            background: var(--gold);
+            position: relative;
+            box-shadow: 0 0 10px var(--gold);
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+        #darkToggle .toggle-thumb {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            box-shadow: inset 0 0 6px #0008;
+            transition: left 0.3s ease;
+        }
+        #darkToggle.active {
+            background: var(--bg-light);
+            box-shadow: 0 0 10px var(--shadow-subtle);
+        }
+        #darkToggle.active .toggle-thumb {
+            left: 22px;
+            background: var(--bg-dark);
+        }
+
+        /* Container */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: calc(var(--nav-height) + 2rem) 3rem 4rem;
+        }
+
+        /* Hero Section */
+        header.hero {
+            text-align: center;
+            margin-bottom: 6rem;
+            user-select: none;
+        }
+        header.hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5rem);
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gold);
+            text-shadow: 0 0 12px var(--gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        header.hero p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--bg-light);
+            margin-bottom: 3rem;
+            font-style: italic;
+            letter-spacing: 0.06em;
+            user-select: none;
+        }
+        .hero-content{
+            width: 95%;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: var(--bg-dark);
+            padding: 1rem 3rem;
+            font-weight: 700;
+            font-size: 1.25rem;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            box-shadow:
+                0 0 18px var(--gold);
+            transition: all 0.35s ease;
+            user-select: none;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-family: 'Playfair Display', serif;
+        }
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background: transparent;
+            color: var(--gold);
+            box-shadow: inset 0 0 12px var(--gold);
+            outline: none;
+            border: 2px solid var(--gold);
+            transform: scale(1.05);
+        }
+
+        /* Section Titles */
+        section h2.section-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 2.8rem;
+            color: var(--gold);
+            text-shadow: 0 0 8px var(--gold);
+            margin-bottom: 3rem;
+            text-align: center;
+            letter-spacing: 0.12em;
+            user-select: none;
+        }
+
+        /* Services Section */
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+            gap: 3rem;
+            margin-bottom: 6rem;
+            user-select: none;
+        }
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border-radius: 20px;
+            padding: 2.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 8px 20px var(--shadow-subtle);
+            border: 1px solid rgba(191,160,111,0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: default;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px var(--shadow-gold);
+            border-color: var(--gold);
+        }
+        .service-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            user-select: none;
+        }
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            margin-bottom: 0.7rem;
+            color: var(--bg-light);
+        }
+        .service-desc {
+            font-size: 1rem;
+            font-style: italic;
+            color: #ddd7cc;
+            user-select: none;
+            line-height: 1.5;
+        }
+
+        /* Products Section */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
+            gap: 2.5rem;
+            margin-bottom: 6rem;
+            user-select: none;
+        }
+        .product-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 24px var(--shadow-subtle);
+            border: 1px solid rgba(191,160,111,0.1);
+            transition: box-shadow 0.35s ease, transform 0.35s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .product-card:hover {
+            box-shadow: 0 16px 36px var(--shadow-gold);
+            transform: translateY(-6px);
+            border-color: var(--gold);
+        }
+        .product-image {
+            width: 100%;
+            aspect-ratio: 1 / 1.25;
+            object-fit: cover;
+            user-select: none;
+            border-bottom: 1px solid rgba(191,160,111,0.15);
+            transition: transform 0.4s ease;
+        }
+        .product-card:hover .product-image {
+            transform: scale(1.03);
+        }
+        .product-info {
+            padding: 1.5rem 1.8rem;
+            flex-grow: 1;
+        }
+        .product-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 0.4rem;
+            color: var(--bg-light);
+        }
+        .product-price {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--gold);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            max-width: 720px;
+            margin: 0 auto 6rem;
+            position: relative;
+            user-select: none;
+            font-family: 'Open Sans', sans-serif;
+            color: #d9d7d1;
+        }
+        .testimonial-slide {
+            background: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            border-radius: 20px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 8px 22px var(--shadow-subtle);
+            border: 1px solid rgba(191,160,111,0.12);
+            text-align: center;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            position: absolute;
+            width: 100%;
+            top: 0; left: 0;
+            pointer-events: none;
+        }
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+            pointer-events: auto;
+        }
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #eeeae3;
+        }
+        .testimonial-author {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--gold);
+            letter-spacing: 0.08em;
+        }
+        .testimonial-controls {
+            text-align: center;
+            margin-top: 1.8rem;
+        }
+        .testimonial-btn {
+            background: var(--gold);
+            border: none;
+            color: var(--bg-dark);
+            padding: 0.5rem 1.2rem;
+            margin: 0 0.9rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .testimonial-btn:hover,
+        .testimonial-btn:focus {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            outline: none;
+        }
+
+        /* Google Map Embed */
+        .map-container {
+            max-width: var(--max-width);
+            margin: 0 auto 6rem;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 36px var(--shadow-subtle);
+            border: 1px solid rgba(191,160,111,0.12);
+            user-select: none;
+        }
+        iframe {
+            width: 100%;
+            height: 360px;
+            border: none;
+            filter: grayscale(0.6) contrast(1.15) brightness(0.85);
+            transition: filter 0.5s ease;
+        }
+        iframe:hover, iframe:focus-visible {
+            filter: grayscale(0) contrast(1) brightness(1);
+            outline: none;
+        }
+
+        /* Instagram Feed */
+        .instagram-feed {
+            max-width: var(--max-width);
+            margin: 0 auto 6rem;
+            display: flex;
+            overflow-x: auto;
+            gap: 1.3rem;
+            user-select: none;
+            padding-bottom: 0.5rem;
+        }
+        .instagram-feed img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 1rem;
+            box-shadow: 0 6px 15px rgba(191,160,111,0.25);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .instagram-feed img:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 30px rgba(191,160,111,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(21, 20, 19, 0.85);
+            backdrop-filter: blur(var(--glass-blur));
+            text-align: center;
+            padding: 2.4rem 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #cfc7af;
+            box-shadow: inset 0 0 15px #fff4;
+            border-top: 1px solid rgba(191,160,111,0.15);
+            user-select: none;
+            font-family: 'Open Sans', sans-serif;
+            letter-spacing: 0.1em;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--gold);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            box-shadow: 0 0 14px var(--shadow-gold);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            z-index: 10000;
+        }
+        .whatsapp-float:hover {
+            background: var(--bg-light);
+            box-shadow: 0 0 18px var(--shadow-subtle);
+        }
+        .whatsapp-float svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--bg-dark);
+            filter: drop-shadow(0 0 2px rgba(0,0,0,0.2));
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 0 1.5rem;
+            }
+            nav ul {
+                gap: 1.2rem;
+                font-size: 0.9rem;
+            }
+            .container {
+                padding: calc(var(--nav-height) + 1.5rem) 1.5rem 3rem;
+            }
+            header.hero h1 {
+                font-size: 3rem;
+            }
+            header.hero p {
+                font-size: 1.1rem;
+            }
+            .services {
+                grid-template-columns: 1fr;
+            }
+            .products {
+                grid-template-columns: 1fr;
+            }
+            .testimonial-btn {
+                padding: 0.45rem 1rem;
+                margin: 0 0.6rem;
+            }
+        }
+    </style>
+
+</head>
+<body class="theme-dark">
+    <header class="nav">
+        <a href="index.html">
+            <img src="Screenshot (21).png" width="120px">
+        </a>
+        <nav class="main-nav">
+            <a href="shop.html">Shop</a>
+            <a href="booking.html">Booking</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+            <a class="cart-link" href="shop.html#cart">Cart</a>
+        </nav>
+    </header>
+
+    <section class="hero hero-flash">
+        <div class="hero-content" style="text-align: center; padding-bottom: 2em;">
+            <h1>Hair Technique</h1>
+            <p>MANIFESTO.DECLARE YOUR STYLE</p>
+            <br/>
+            <br/>
+            <p>Hair Technique is a cutting edge, vibrant and chic hair salon based in lenasia.</p>
+            <p>Our team of award winning stylist stive to continuosly build on their knowledge and skills to bring the latest industry trends to you.</p>
+            <br/>
+            <br/>
+            <br/>
+            <div class="cta-group">
+                <a class="btn btn-primary" href="/shop.html">Shop products</a>
+                <a class="btn btn-ghost" href="/booking.html">Book a session</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" aria-label="Our services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services">
+           <a href="gallery.html"> 
+            <div class="service-card" tabindex="0" aria-describedby="desc1" role="region" aria-label="Haircuts service">
+                <div class="service-icon" aria-hidden="true">✂️</div>
+                <h3 class="service-title">Haircuts</h3>
+                <p id="desc1" class="service-desc">Stylish cuts tailored to your look.</p>
+            </div>
+           </a>
+           <a href="gallery.html#styling"> 
+            <div class="service-card" tabindex="0" aria-describedby="desc2" role="region" aria-label="Styling service">
+                <div class="service-icon" aria-hidden="true">💇‍♀️</div>
+                <h3 class="service-title">Styling</h3>
+                <p id="desc2" class="service-desc">Trendy styles for any occasion.</p>
+            </div>
+           </a>
+           
+           <a href="gallery.html#treatements">
+            <div class="service-card" tabindex="0" aria-describedby="desc3" role="region" aria-label="Hair treatments service">
+                <div class="service-icon" aria-hidden="true">🌿</div>
+                <h3 class="service-title">Hair Treatments</h3>
+                <p id="desc3" class="service-desc">Revitalize with nourishing treatments.</p>
+            </div>
+           </a> 
+        </div>
+    </section>
+<h2 class="section-title">Featured Products</h2>
+
+    <section id="products" aria-label="Featured Products" class="container products-section">
+  
+
+
+  <div id="product-list" class="product-grid">
+    <!-- Example product card -->
+    <div class="product-card">
+      <img 
+        src="anti-aging-serum"
+        alt="Anti Aging Serum"
+        class="product-image"
+      >
+      <div class="product-info">
+        <h3 class="product-name">Anti Aging Serum</h3>
+        <p class="product-price">R590.00</p>
+      </div>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+
+    <!-- Repeat product-card blocks for each product -->
+    <div class="product-card">
+      <img src="glass-conditioner.webp" alt="Conditioner" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Conditioner</h3>
+        <p class="product-price">R590.00</p>
+      </div>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="glass-shampoo.webp" alt="Conditioner" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">shampoo</h3>
+        <p class="product-price">R590.00</p>
+      </div>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+    <div class="product-card">
+      <img src="hair-loss-mist.webp" alt="Conditioner" class="product-image">
+      <div class="product-info">
+        <h3 class="product-name">Hair Loss Mist</h3>
+        <p class="product-price">R590.00</p>
+      </div>
+      <button class="add-to-cart-btn">Add to Cart</button>
+    </div>
+
+    <!-- Add more product-card blocks as needed -->
+  </div>
+</section>
+
+
+    <!-- Old legacy elements—safe to delete if not needed -->
+    <ul id="cart-items" style="display:none;"></ul>
+    <p id="cart-total" style="display:none;">Total: $0.00</p>
+    <button id="checkout-btn" style="display:none;">Checkout</button>
+
+</section>
+
+
+    <section id="testimonials-section" aria-label="Client Testimonials">
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="testimonials">
+            <div id="testimonial-carousel">
+                <div class="testimonial-slide active">
+                    <p class="testimonial-text">"The best haircut I've ever had! The staff are highly skilled and the atmosphere is welcoming. Hair Technique is my new go-to place in Lenasia."</p>
+                    <p class="testimonial-author">— Khanyi M.</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">"I highly recommend their hair treatments. My hair feels revitalized and stronger after just one session. Truly professional service."</p>
+                    <p class="testimonial-author">— David P.</p>
+                </div>
+            </div>
+            <div class="testimonial-controls">
+                <button class="testimonial-btn" onclick="prevTestimonial()">Previous</button>
+                <button class="testimonial-btn" onclick="nextTestimonial()">Next</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" aria-label="Our Location">
+        <h2 class="section-title">Find Us in Lenasia</h2>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14317.023249156067!2d27.85966455!3d-26.3725514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9508544e3f492d%3A0x7d97e7423d4c3821!2sLenasia!5e0!3m2!1sen!2sza!4v1701600000000!5m2!1sen!2sza" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map of Lenasia, location of Hair Technique"></iframe>
+        </div>
+    </section>
+
+    <section id="instagram-feed-section" aria-label="Follow us on Instagram">
+        <h2 class="section-title">#HairTechniqueLenasia</h2>
+        <div class="instagram-feed">
+            <img src="path/to/insta-1.jpg" alt="Hair style photo 1" tabindex="0">
+            <img src="path/to/insta-2.jpg" alt="Hair style photo 2" tabindex="0">
+            <img src="path/to/insta-3.jpg" alt="Hair style photo 3" tabindex="0">
+            <img src="path/to/insta-4.jpg" alt="Hair style photo 4" tabindex="0">
+            <img src="path/to/insta-5.jpg" alt="Hair style photo 5" tabindex="0">
+        </div>
+    </section>
+
+    
+
+    <footer class="footer">
+        <p>© Hair Technique, Lenasia</p>
+    </footer>
+
+    
+    <script src="script.js"></script>
+</body>
+</html>

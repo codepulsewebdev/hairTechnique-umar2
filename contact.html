@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Meta -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Hair Technique</title>
+  <meta name="description" content="Contact Hair Technique Studio in Lenasia. Get in touch for bookings, products, and inquiries." />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+<body class="theme-dark">
+
+  <!-- Navigation -->
+  <header class="nav">
+    <a href="index.html">
+            <img src="Screenshot (21).png" width="120px">
+        </a>
+    <nav>
+      <a href="/shop.html">Shop</a>
+      <a href="/booking.html">Booking</a>
+      <a href="/gallery.html">Gallery</a>
+      <a href="/contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Contact Us</h1>
+      <p>We’d love to hear from you — reach out for bookings, product inquiries, or general questions.</p>
+    </div>
+  </section>
+
+  <!-- Contact Info -->
+  <main class="container contact">
+    <section class="contact-info">
+      <h2>Get in Touch</h2>
+      <ul>
+        <li><strong>Phone:</strong> <a href="tel:+27110000000">+27 11 000 0000</a></li>
+        <li><strong>Email:</strong> <a href="mailto:info@hairtechnique.co.za">info@hairtechnique.co.za</a></li>
+        <li><strong>WhatsApp:</strong> <a href="https://wa.me/27110000000" target="_blank">Chat with us</a></li>
+        <li><strong>Address:</strong> Lenasia, Johannesburg, South Africa</li>
+      </ul>
+    </section>
+
+    <!-- Map Placeholder -->
+    <section class="map">
+      <h2>Find Us</h2>
+      <div class="map-placeholder">
+        <!-- Replace with embedded Google Map iframe -->
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3562.123456789!2d27.85!3d-26.27!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e95a123456789%3A0xabcdef123456789!2sLenasia%2C%20Johannesburg!5e0!3m2!1sen!2sza!4v0000000000000"
+          width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
+        </iframe>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form">
+      <h2>Send Us a Message</h2>
+      <form id="contact-form" class="form">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+      <div id="contact-message" class="message"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© Hair Technique, Lenasia</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!-- public/shop.html -->
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Shop — Hair Technique</title>
+<link rel="stylesheet" href="style.css" />
+</head><body>
+<header class="nav"><a href="index.html">
+            <img src="Screenshot (21).png" width="120px">
+        </a><nav>
+  <a href="/booking.html">Booking</a><a href="/gallery.html">Gallery</a><a href="/contact.html">Contact</a>
+</nav></header>
+
+<main class="container">
+  <section id="products" class="grid"></section>
+
+  <section id="cart" class="cart">
+    <h2>Cart</h2>
+    <div id="cart-items"></div>
+    <div class="totals">
+      <div><span>Subtotal</span><strong id="subtotal">R0.00</strong></div>
+      <div><span>VAT (15%)</span><strong id="vat">R0.00</strong></div>
+      <div><span>Total</span><strong id="total">R0.00</strong></div>
+    </div>
+
+    <form id="checkout-form">
+      <button class="btn btn-primary" type="submit">Checkout with PayFast</button>
+    </form>
+  </section>
+</main>
+
+<main class="container">
+
+  <!-- PRODUCTS WILL BE LOADED HERE -->
+  <section id="products" class="grid"></section>
+
+ 
+
+<script src="script.js"></script>
+</body></html>
